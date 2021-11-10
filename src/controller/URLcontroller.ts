@@ -2,9 +2,13 @@ import { Request, Responde } from 'express'
 import shortId from 'shortid'
 
 export class URLcontroller {
-    public async shorten(req: Request, res: Response): Promise<void>{
-const {originURL} = req.body
+    public async shorten(req: Request, res: Response): Promise<void> {
+const { originURL } = req.body
 const hash = shortId.generate()
+const shortURL = `${config.API_URL}/${hash}`
+
+
+Responde.json({ originURL, hash, shortURL })
 
 
 
