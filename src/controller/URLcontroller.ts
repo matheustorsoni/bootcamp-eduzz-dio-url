@@ -1,4 +1,4 @@
-import { Request, Responde } from 'express'
+import { Request, Response } from 'express'
 import shortId from 'shortid'
 
 export class URLcontroller {
@@ -9,16 +9,14 @@ const shortURL = `${config.API_URL}/${hash}`
 
 
 Responde.json({ originURL, hash, shortURL })
+ }
+ public async redirect(req: Request, res: Response): Promise<void>{
+const {hash} = req.params
 
-
-
-
-
-
-// verificaçao de url4
-// criar o hash para url1
-// salvar url no banco3
-// retornar url q salvou 2
+const url = {
+originURL: 'https://cloud.mongodb.com/v2/618bee84e7a2782ce9adbc9d#clusters/connect?clusterId=bootcamps-eduzz',
+hash: 
+}
 
  }
 }
