@@ -1,10 +1,10 @@
 import express from 'express'
+import { URLcontroller } from './controller/URLcontroller';
 
 const api = express()
 
-api.use('/test', (req: Resquest, res: Response) => {
-res.json({sucess: true })
-});
+const urlController = new URLcontroller()
+api.post("/shorten", urlController.shorten)
 
 
 api.listen(5000, () => console.log('Express listening'));
