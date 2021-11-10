@@ -15,7 +15,7 @@
 "outDir": "./dist",
 "rootDir": "./src/",
 "sourceMap": true,
-"lib": ["ES6", "don", "es2017", "es7"],
+"lib": ["ES6","dom", "es2017", "es7"],
 "resolveJsonModule": true,
 "experimentalDecorators": true,
 "emitDecoratorMetadata": true
