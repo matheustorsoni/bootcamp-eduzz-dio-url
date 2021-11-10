@@ -29,3 +29,4 @@ export class URLController {
 		response.status(400).json({ error: 'URL not found' })
 	}
 }
+
