@@ -1,22 +1,31 @@
 import { Request, Response } from 'express'
 import shortId from 'shortid'
+import { config } from '../config/Constants'
+import { URLModel } from '../database/model/URL'
 
-export class URLcontroller {
-    public async shorten(req: Request, res: Response): Promise<void> {
-const { originURL } = req.body
-const hash = shortId.generate()
-const shortURL = `${config.API_URL}/${hash}`
+export class URLController {
+	public async shorten(req: Request, response: Response): Promise<void> {
+		const { originURL } = req.body
+		const url = await URLModel.findOne({ originURL })
+		if (url) {
+			response.json(url)
+			return
+		}
+		const hash = shortId.generate()
+		const shortURL = `${config.API_URL}/${hash}`
+		const newURL = await URLModel.create({ hash, shortURL, originURL })
+		response.json(newURL)
+	}
 
+	public async redirect(req: Request, response: Response): Promise<void> {
+		const { hash } = req.params
+		const url = await URLModel.findOne({ hash })
 
-Responde.json({ originURL, hash, shortURL })
- }
- public async redirect(req: Request, res: Response): Promise<void>{
-const {hash} = req.params
+		if (url) {
+			response.redirect(url.originURL)
+			return
+		}
 
-const url = {
-originURL: 'https://cloud.mongodb.com/v2/618bee84e7a2782ce9adbc9d#clusters/connect?clusterId=bootcamps-eduzz',
-hash: 
-}
-
- }
+		response.status(400).json({ error: 'URL not found' })
+	}
 }
